@@ -1,0 +1,22 @@
+go test ./... -v
+https://blog.logrocket.com/benchmarking-golang-improve-function-performance/
+
+E.g. Test
+go test -benchmem -run=^$ -bench ^BenchmarkNew$ github.com/go-gota/gota/dataframe -count=5
+
+go test -benchmem -run=^$ -bench ^BenchmarkSeries_Append dataframe_research/series -count=5
+
+Test Columns are in the format
+TestName - NumLoopIterations - AverageTimePerIteration - AverageNumberBytesPerAllocation - NumberOfAllocationsPerOperatione
+
+https://stackoverflow.com/questions/73864711/get-type-parameter-from-a-generic-struct-using-reflection
+
+go mod tidy
+
+https://github.com/golang/tools
+https://go.dev/blog/godoc
+
+After doing
+go install golang.org/x/tools/cmd/godoc@latest
+Had to do 
+export PATH="$PATH:/Users/user/go/bin"

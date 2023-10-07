@@ -1,0 +1,42 @@
+// General Ideas, could change
+
+- How to handle that a value might be null gracefully
+- Golang seems to be very explicit and like to avoid some of the "magic" often that something like 
+pandas might provide, with this in mind, theres a question of how much I want to constrain my use cases 
+- Arrow v12 has SetColumn(i int, col Array) (Record, error) on the arrow.Array interface, refactor for use?
+- Explore Locking For Handling of DataFrame across locations
+- Support Nullable better, infrastructure is there, support isn't great
+- Consider adding my own errors in place of default errors.New()
+- Implement a Rolling Type that can allow for collated rolling operations
+- JSON Marshaler and Unmarshaler Interfaces (json.Marshaler and json.Unmarshaler)
+- Investigate Iterators and their potential usage
+- Investigate and make note of where coroutines might be useful
+- One Idea I Had was that to avoid the issue's involved with type-casting to certain interfaces etc, 
+  I might have direct links to each array type (Int32, Int64, etc) and this might allow for better performance than always casting out to an array
+  some bug risks here but might be totally possible to guard around it and worthwhile from a performance standpoint(maybe)
+  (checkout arrow.PrimitiveTypes for an example of this?)
+
+// Less of a to-do and more general notes during initial golang proj
+Idiomatic Golang: https://www.youtube.com/watch?v=9cJHCoSxbn8
+- Anything that panics should probably have "must/Must" to indicate it MUST succeed otherwise panic
+- Ask If Something Should Be Printing or Logging
+- For Struct Initializations, ensure using explicit field: for assignment guarantees
+- For Mutexes, group name/lock with what you're looking to protect, easy/idiomatic
+- Ensure that anything being created that needs a defer for Cleanup is called
+- Interfaces vs Structs
+    - Interfaces are good especially if we might expect for users to want to extend functionality and want to force a contract
+    - I Tend to favor Interfaces, Ideally Small Interfaces for composability and flexibility but for squeezing performance
+    may not favor it
+    - A Concrete Type passed via a pointer May Provide Superior Performance to an interface
+- Interface Naming
+    - Use "er" or "able" Suffix on Interfaces wherever possible
+        - "er" for actions or behaviors (Reader, Writer, Logger, Tracker, Handler)
+        - "able" for actions or behavioes (Releasable, Readable, Trackable, Manageable)
+- Grouping
+    - Exported Variables, Interfaces, Structs, Functions at the top
+    - Private Variables, Interfaces, Structs, Functions demoted
+
+Some Inspirations:
+- https://github.com/rocketlaunchr/dataframe-go
+- https://github.com/tobgu/qframe
+- https://github.com/go-gota/gota
